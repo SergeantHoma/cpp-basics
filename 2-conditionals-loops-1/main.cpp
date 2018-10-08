@@ -1,15 +1,14 @@
-#define _USE_MATH_DEFINES
 #include <iostream>
-#include <cmath>
-#include <stdio.h>
 #include <iomanip>
+#include <cmath>
 #include <string>
 
 using namespace std;
 
+
 int main() {
 	double a, b, c, xn, xk, dx, x, f;
-	const double EPS = 1e-15;
+	const double kEps = 1e-15;
 
 	cout << "Enter a: ";
 	cin >> a;
@@ -21,9 +20,9 @@ int main() {
 	cin >> xn;
 	cout << "Enter xk: ";
 	cin >> xk;
-	cout << "Enter dx: ";
+	cout << "Enter dx , where dx>0: ";
 	cin >> dx;
-	if (abs(dx) > EPS)
+	if (dx > kEps)
 	{
 		cout << endl << string(37, '-') << endl;
 		cout << "|" << setw(9) << "x" << setw(9);
@@ -46,7 +45,7 @@ int main() {
 				if ((x > 5) && (c = 0))
 				{
 					if (x != 0)
-						f = ((x - a) / x);
+						f = (x - a) / x;
 					else
 					{
 						cout << "|" << setw(11) << x << setw(7);
@@ -56,11 +55,14 @@ int main() {
 					}
 				}
 				else
-					f = ((-x) / c);
+					if (c != 0)
+					{
+						f = ((-x) / c);
+					}
 			}
 			cout << "|" << setw(11) << x << setw(7) << "|";
 
-			if (((int(a) | int(b)) & (int(a) | int(c))) != 0)
+			if (((int(a) || int(b)) & (int(a) || int(c))) != 0)
 				cout << setw(11) << f << setw(7);
 			else
 				cout << setw(9) << int(f) << setw(9);
@@ -73,6 +75,6 @@ int main() {
 		cout << string(37, '-') << endl;
 	}
 	else
-		cout << "\nError!\n";
+		cout << "\nError dx !\n";
 	return 0;
 }
