@@ -36,15 +36,15 @@ int main() {
 
 		while(x<=xk)
 		{
-			if ((x < 5) && (c != 0))
+			if ((x < 5) && (abs(c) < kEps))
 			{
-				f = a * (pow(x, 2)) - b;
+				f = a * pow(x, 2) - b;
 			}
 			else
 			{
-				if ((x > 5) && (c = 0))
+				if ((x > 5) && (abs(c) < 0))
 				{
-					if (x != 0)
+					if (abs(x)> kEps)
 						f = (x - a) / x;
 					else
 					{
@@ -55,14 +55,14 @@ int main() {
 					}
 				}
 				else
-					if (c != 0)
+					if (abs(c)>kEps)
 					{
-						f = ((-x) / c);
+						f = (-x) / c;
 					}
 			}
 			cout << "|" << setw(11) << x << setw(7) << "|";
 
-			if (((int(a) || int(b)) & (int(a) || int(c))) != 0)
+			if (((int(a) | int(b)) % (int(a) | int(c))) != 0)
 				cout << setw(11) << f << setw(7);
 			else
 				cout << setw(9) << int(f) << setw(9);
