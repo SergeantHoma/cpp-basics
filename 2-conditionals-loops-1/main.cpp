@@ -36,7 +36,7 @@ int main() {
 
 		while(x<=xk)
 		{
-			if ((x < 5) && (abs(c) < kEps))
+			if ((x < 5) && (abs(c) > kEps))
 			{
 				f = a * pow(x, 2) - b;
 			}
