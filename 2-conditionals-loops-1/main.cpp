@@ -68,7 +68,7 @@ int main() {
 			}
 			cout << "|" << setw(11) << x << setw(7) << "|";
 
-			if (((int(a) | int(b)) % (int(a) | int(c))) != 0)
+			if (((int(a) | int(b)) ^ (int(a) | int(c))) != 0)
 				cout << setw(11) << f << setw(7);
 			else
 				cout << setw(9) << int(f) << setw(9);
