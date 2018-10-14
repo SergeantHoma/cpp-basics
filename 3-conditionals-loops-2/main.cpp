@@ -8,8 +8,10 @@ using namespace std;
 
 
 int main() {
-	const int MaxIter = 500;
-	double X1, X2, dX, Eps, f;
+	const int kMaxIter = 500;
+	double X1, X2, dX, Eps;
+	cout << fixed;
+	cout.precision(6);
 	cout << "Enter X start: ";
 	cin >> X1;
 	cout << "Enter X end: ";
@@ -19,38 +21,39 @@ int main() {
 	cout << "Enter EPS: ";
 	cin >> Eps;
 
-	if (dX > 0 && X2 > 1 && abs(X1) <= 1) {
+	if (abs(dX) <= 0 && abs(X2) > 0 )  {
 
 
 		cout << string(60, '-') << "\n|"
 			<< setw(8) << "X" << setw(7)
 			<< "|" << setw(12) << "arcctg(x)"
 			<< setw(3) << "|" << setw(12)
-			<< "arcctg(x)" << setw(3) << "|" << setw(12) << "Iterations" << setw(3) << "|\n"
-			<< string(60, '-') << endl;
+			<< "arcctg(x)" << setw(3) << "|" 
+			<< setw(12) << "Iterations" << setw(3) << "|\n"
+						<< string(60, '-') << endl;
 		double arcctg1, arcctg2;
 
 		for (double x = X1; x <= X2; x += dX) {
 
 			arcctg1 = 0, arcctg2 = M_PI_2;
 
-			for (int n = 0; n < MaxIter; n++) {
+			for (int n = 0; n < kMaxIter; n++) {
 
 				arcctg2 += (pow(-1, n + 1)*pow(x, 2 * n + 1)) / (2 * n + 1);
 
 				if (abs(arcctg2 - arcctg1) < Eps)
 				{
-					f = atan(x);
-					f = M_PI_2 - f;
+					x = atan(x);
+					x = M_PI_2 - x;
 
 					cout << "|" << setw(14) << x
-						<< "|" << setw(14) << arcctg2 << "|" << setw(14) << f
+						<< "|" << setw(14) << arcctg2 << "|" << setw(14) << x
 						<< "|" << setw(13) << n << "|\n";
 					break;
 				}
 
 
-				if (MaxIter - n < 2) {
+				if (kMaxIter - n < 2) {
 					cout << "small EPS";
 					return 2;
 				}
@@ -62,7 +65,7 @@ int main() {
 	}
 
 	else {
-		cout << "Error";
+		cout << "Error, Invaélid values";
 	}
 	return 0;
 }

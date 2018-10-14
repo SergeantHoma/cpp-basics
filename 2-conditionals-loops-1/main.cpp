@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 int main() {
 	double a, b, c, xn, xk, dx, x, f;
 	const double kEps = 1e-15;
@@ -59,6 +58,13 @@ int main() {
 					{
 						f = (-x) / c;
 					}
+					else
+					{
+						cout << "|" << setw(11) << xn << setw(7);
+						cout << "|" << "  division by zero  |\n";
+						xn += dx;
+						continue;
+					}
 			}
 			cout << "|" << setw(11) << x << setw(7) << "|";
 
@@ -70,8 +76,7 @@ int main() {
 			cout << "|" << endl;
 
 			x += dx;
-		
-		}
+				}
 		cout << string(37, '-') << endl;
 	}
 	else
