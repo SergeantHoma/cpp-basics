@@ -37,21 +37,13 @@ int main() {
 		{
 			if ((x < 5) && (abs(c) > kEps))
 			{
-				f = a * pow(x, 2) - b;
+				f = -a * pow(x, 2) - b;
 			}
 			else
 			{
-				if ((x > 5) && (abs(c) < 0))
+				if ((x > 5) && (abs(c) < kEps))
 				{
-					if (abs(x)> kEps)
-						f = (x - a) / x;
-					else
-					{
-						cout << "|" << setw(11) << x << setw(7);
-						cout << "|" << "  division by 0  |\n";
-						x += dx;
-						continue;
-					}
+				f = (x - a) / x; 					
 				}
 				else
 					if (abs(c)>kEps)
@@ -60,9 +52,9 @@ int main() {
 					}
 					else
 					{
-						cout << "|" << setw(11) << xn << setw(7);
-						cout << "|" << "  division by zero  |\n";
-						xn += dx;
+						cout << "|" << setw(11) << x << setw(7);
+						cout << "|" << "  division by 0  |\n";
+						x += dx;
 						continue;
 					}
 			}
