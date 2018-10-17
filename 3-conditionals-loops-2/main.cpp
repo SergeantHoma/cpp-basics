@@ -21,7 +21,7 @@ int main() {
 	cout << "Enter EPS: ";
 	cin >> Eps;
 
-	if (abs(dX) <= 0 && abs(X2) > 0 )  {
+	if (abs(X1) <= 1 && abs(X2) <= 1 && abs(dX) > kMaxIter)  {
 
 
 		cout << string(60, '-') << "\n|"
@@ -49,7 +49,7 @@ int main() {
 					cout << "|" << setw(14) << x
 						<< "|" << setw(14) << arcctg2 << "|" << setw(14) << x
 						<< "|" << setw(13) << n << "|\n";
-					break;
+					continue;
 				}
 
 
@@ -65,7 +65,7 @@ int main() {
 	}
 
 	else {
-		cout << "Error, Invaélid values";
+		cout << "Error, Invalid values";
 	}
 	return 0;
 }
