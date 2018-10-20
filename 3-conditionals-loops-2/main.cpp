@@ -6,66 +6,53 @@
 
 using namespace std;
 
-
 int main() {
-	const int kMaxIter = 500;
-	double X1, X2, dX, Eps;
-	cout << fixed;
-	cout.precision(6);
-	cout << "Enter X start: ";
-	cin >> X1;
-	cout << "Enter X end: ";
-	cin >> X2;
-	cout << "Enter dX: ";
-	cin >> dX;
-	cout << "Enter EPS: ";
-	cin >> Eps;
+	const int kMaxIter = 1000000;
 
-	if (abs(X1) <= 1 && abs(X2) <= 1 && abs(dX) > kMaxIter)  {
+	double xn, xk, dx, eps;
+	cout << "-1 <= x <= 1\n";
+	cout << "Enter xn: ";
+	cin >> xn;
+	cout << "Enter xk >= xn: ";
+	cin >> xk;
+	cout << "Enter dx > 0: ";
+	cin >> dx;
+	cout << "Enter eps > 0: ";
+	cin >> eps;
 
+	if (abs(xn) <= 1 && abs(xk) <= 1 && dx > 0 && eps > 0 && xn <= xk) {
+		cout << string(68, '-') << endl;
+		cout << "|" << setw(7) << "x" << setw(7);
+		cout << "|" << setw(19) << " arcctg(x) (mine) ";
+		cout << "|" << setw(19) << "arcctg(x) (cmath) ";
+		cout << "|" << setw(11) << "iterations" << setw(3) << "|\n";
+		cout << string(68, '-') << endl;
 
-		cout << string(60, '-') << "\n|"
-			<< setw(8) << "X" << setw(7)
-			<< "|" << setw(12) << "arcctg(x)"
-			<< setw(3) << "|" << setw(12)
-			<< "arcctg(x)" << setw(3) << "|" 
-			<< setw(12) << "Iterations" << setw(3) << "|\n"
-						<< string(60, '-') << endl;
-		double arcctg1, arcctg2;
+		cout << fixed;
+		cout.precision(6);
 
-		for (double x = X1; x <= X2; x += dX) {
-
-			arcctg1 = 0, arcctg2 = M_PI_2;
-
-			for (int n = 0; n < kMaxIter; n++) {
-
-				arcctg2 += (pow(-1, n + 1)*pow(x, 2 * n + 1)) / (2 * n + 1);
-
-				if (abs(arcctg2 - arcctg1) < Eps)
-				{
-					x = atan(x);
-					x = M_PI_2 - x;
-
-					cout << "|" << setw(14) << x
-						<< "|" << setw(14) << arcctg2 << "|" << setw(14) << x
-						<< "|" << setw(13) << n << "|\n";
-					continue;
-				}
-
-
-				if (kMaxIter - n < 2) {
-					cout << "small EPS";
-					return 2;
-				}
-
-				arcctg1 = arcctg2;
+		for (double x = xn; x <= xk; x += dx) {
+			int n;
+			double arcctg = M_PI_2, nth_term;
+			for (n = 0; n <= kMaxIter; n++) {
+				nth_term = pow(-1, n + 1) * pow(x, 2 * n + 1) / (2 * n + 1);
+				arcctg += nth_term;
+				if (abs(nth_term) < eps) break;
 			}
+
+			cout << "|" << setw(11) << x << setw(3) << "|";
+			if (n <= kMaxIter)
+				cout << setw(14) << arcctg << setw(6);
+			else
+				cout << " limit is exceeded ";
+			cout << "|" << setw(14) << M_PI_2 - atan(x) << setw(6);
+			cout << "|" << setw(7) << n << setw(7) << "|\n";
 		}
-		cout << string(60, '-');
+		cout << string(68, '-');
+	}
+	else {
+		cout << "\nError! Invalid input values.\n";
 	}
 
-	else {
-		cout << "Error, Invalid values";
-	}
 	return 0;
 }
