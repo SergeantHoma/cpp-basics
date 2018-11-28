@@ -6,7 +6,8 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
 	const int kMaxIter = 1000000;
 
 	double xn, xk, dx, eps;
@@ -20,7 +21,8 @@ int main() {
 	cout << "Enter eps > 0: ";
 	cin >> eps;
 
-	if (abs(xn) <= 1 && abs(xk) <= 1 && dx > 0 && eps > 0 && xn <= xk) {
+	if (abs(xn) <= 1 && abs(xk) <= 1 && dx > 0 && eps > 0 && xn <= xk)
+	{
 		cout << string(68, '-') << endl;
 		cout << "|" << setw(7) << "x" << setw(7);
 		cout << "|" << setw(19) << " arcctg(x) (mine) ";
@@ -31,10 +33,12 @@ int main() {
 		cout << fixed;
 		cout.precision(6);
 
-		for (double x = xn; x <= xk; x += dx) {
+		for (double x = xn; x <= xk; x += dx)
+		{
 			int n;
 			double arcctg = M_PI_2, nth_term;
-			for (n = 0; n <= kMaxIter; n++) {
+			for (n = 0; n <= kMaxIter; n++)
+			{
 				nth_term = pow(-1, n + 1) * pow(x, 2 * n + 1) / (2 * n + 1);
 				arcctg += nth_term;
 				if (abs(nth_term) < eps) break;
@@ -50,8 +54,9 @@ int main() {
 		}
 		cout << string(68, '-');
 	}
-	else {
-		cout << "\nError! Invalid input values.\n";
+	else
+	{
+		cout << "Error!\n";
 	}
 
 	return 0;
